@@ -1,0 +1,23 @@
+name: Ежедневный сбор в Discord
+
+on:
+  schedule:
+    # Для четверга, пятницы, субботы (4 запуска в день)
+    - cron: '40,45,50,55 19 * * 4,5,6'
+      timezone: "Europe/Moscow"
+    # Для воскресенья, понедельника, вторника, среды (1 запуск в день)
+    - cron: '30 20 * * 0,1,2,3'
+      timezone: "Europe/Moscow"
+  workflow_dispatch: # Позволяет запустить вручную для теста
+
+jobs:
+  send-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send Discord messages
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python3 send_discord.py
