@@ -2,10 +2,11 @@ import os
 import json
 import urllib.request
 
-# Используем НОВЫЙ секрет для другого канала
+# Берем ссылку из секрета для НОВОГО канала
 WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_SQUADS"]
 TEXT = "@everyone Просьба отписаться в чат до 19:00 по МСК, так как будут формироваться отряды!"
 
+# Защита от ошибки 403 (притворяемся браузером)
 HEADERS = {
     "Content-Type": "application/json",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -21,6 +22,6 @@ req = urllib.request.Request(WEBHOOK_URL, data=data, headers=HEADERS)
 
 try:
     urllib.request.urlopen(req)
-    print("Сообщение об отрядах отправлено.")
+    print("Сообщение об отрядах успешно отправлено.")
 except Exception as e:
     print(f"Ошибка при отправке: {e}")
