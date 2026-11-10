@@ -1,0 +1,20 @@
+name: Сбор отрядов
+
+on:
+  schedule:
+    # 15:00 МСК = 12:00 UTC. Дни: Чт (4), Пт (5), Сб (6). Никаких timezone!
+    - cron: '0 12 * * 4,5,6' 
+  workflow_dispatch: # Для ручного теста
+
+jobs:
+  send-squads:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send Squads Message
+        env:
+          # Передаем правильный секрет
+          DISCORD_WEBHOOK_SQUADS: ${{ secrets.DISCORD_WEBHOOK_SQUADS }}
+        run: python3 send_squads.py
