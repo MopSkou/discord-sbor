@@ -1,0 +1,19 @@
+name: Уведомление о потасовке
+
+on:
+  schedule:
+    # 10:00 МСК = 07:00 UTC (Вс, Пн, Вт, Ср)
+    - cron: '0 7 * * 0,1,2,3'
+  workflow_dispatch: # Позволяет запустить вручную для теста
+
+jobs:
+  send-potasovka:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send Potasovka Message
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python3 send_potasovka.py
