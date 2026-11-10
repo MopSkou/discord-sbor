@@ -1,0 +1,19 @@
+name: Не забываем отписываться кого не будет!
+
+on:
+  schedule:
+    # 15:00 МСК = 12:00 UTC. Дни: Чт (4), Пт (5), Сб (6). (Если нужно каждый день, замените 4,5,6 на *)
+    - cron: '0 12 * * 4,5,6' 
+  workflow_dispatch: # Для ручного теста
+
+jobs:
+  send-third:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send Message
+        env:
+          DISCORD_WEBHOOK_THIRD: ${{ secrets.DISCORD_WEBHOOK_THIRD }}
+        run: python3 send_third.py
