@@ -3,7 +3,7 @@ import json
 import urllib.request
 
 WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
-TEXT = "@everyone Играем потасовку 3 этап"
+TEXT = "@everyone Напоминание: мы играем потасовку только 3 этап.Сбор в 20:30, начало в 20:40"
 
 HEADERS = {
     "Content-Type": "application/json",
