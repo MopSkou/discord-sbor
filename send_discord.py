@@ -4,7 +4,7 @@ import json
 import urllib.request
 
 WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
-TEXT = "@everyone Сбор на турнир/потасы"
+TEXT = "@everyone Сбор на турнир"
 
 # Добавляем заголовок User-Agent, чтобы Discord не блокировал запрос
 HEADERS = {
